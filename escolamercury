@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Autenticação de Diploma</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+.container{
+    background:#fff;
+    width:500px;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    text-align:center;
+}
+h2{
+    margin-bottom:20px;
+}
+input{
+    width:80%;
+    padding:12px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+button{
+    padding:12px 20px;
+    margin-top:10px;
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+button:hover{
+    background:#1d4ed8;
+}
+.resultado{
+    margin-top:25px;
+    text-align:left;
+}
+.valido{
+    color:green;
+    font-weight:bold;
+}
+.invalido{
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Verificação de Autenticidade</h2>
+
+    <input type="text" id="codigo" placeholder="Digite o código do diploma">
+    <br>
+    <button onclick="verificar()">Verificar</button>
+
+    <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+const diplomas = {
+    "DIP-2026-001": {
+        nome: "João da Silva",
+        curso: "Técnico em Informática",
+        carga: "120 horas",
+        data: "10/02/2026",
+        registro: "REG-987654"
+    },
+    "DIP-2026-002": {
+        nome: "Maria Oliveira",
+        curso: "Montagem e Manutenção",
+        carga: "80 horas",
+        data: "05/02/2026",
+        registro: "REG-123456"
+    }
+};
+
+function verificar(){
+    let codigo = document.getElementById("codigo").value.toUpperCase();
+    let resultado = document.getElementById("resultado");
+
+    if(diplomas[codigo]){
+        let aluno = diplomas[codigo];
+        resultado.innerHTML = `
+            <p class="valido">✔ Diploma Válido</p>
+            <strong>Nome:</strong> ${aluno.nome}<br>
+            <strong>Curso:</strong> ${aluno.curso}<br>
+            <strong>Carga Horária:</strong> ${aluno.carga}<br>
+            <strong>Data de Conclusão:</strong> ${aluno.data}<br>
+            <strong>Nº Registro:</strong> ${aluno.registro}
+        `;
+    } else {
+        resultado.innerHTML = `<p class="invalido">✖ Código não encontrado</p>`;
+    }
+}
+</script>
+
+</body>
+</html>
